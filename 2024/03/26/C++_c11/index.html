@@ -21,30 +21,34 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Try to live your life right">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CC2000的精神时光屋">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="第十一章 流类库与输入输出11-1 什么叫做流？流的提取和插入是指什么？I&#x2F;O流在C++语言中起着怎样的作用？ 在C++中，将数据从一个对象到另一个对象的流动抽象为流。它负责在数据的生产者和数据的消费者之间建立联系，并管理数据的流动。对程序而言，流对象被看作是文件对象的化身。 读操作被称为（从流中）提取；写操作被称为（向流中）插入。 数据的输入输出是通过I&#x2F;O流实现的。  1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++语言程序设计（郑莉第五版）第十一章课后习题代码实现">
+<meta property="og:url" content="http://example.com/2024/03/26/C++_c11/index.html">
 <meta property="og:site_name" content="CC2000的精神时光屋">
-<meta property="og:description" content="Try to live your life right">
+<meta property="og:description" content="第十一章 流类库与输入输出11-1 什么叫做流？流的提取和插入是指什么？I&#x2F;O流在C++语言中起着怎样的作用？ 在C++中，将数据从一个对象到另一个对象的流动抽象为流。它负责在数据的生产者和数据的消费者之间建立联系，并管理数据的流动。对程序而言，流对象被看作是文件对象的化身。 读操作被称为（从流中）提取；写操作被称为（向流中）插入。 数据的输入输出是通过I&#x2F;O流实现的。  1">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-26T07:58:19.905Z">
+<meta property="article:modified_time" content="2024-03-25T05:19:13.113Z">
 <meta property="article:author" content="CC2000">
+<meta property="article:tag" content="C++语法">
+<meta property="article:tag" content="流类库与输入输出">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2024/03/26/C++_c11/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>CC2000的精神时光屋</title>
+  <title>C++语言程序设计（郑莉第五版）第十一章课后习题代码实现 | CC2000的精神时光屋</title>
   
 
 
@@ -162,150 +166,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/26/data_structure/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="CC2000">
-      <meta itemprop="description" content="Try to live your life right">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CC2000的精神时光屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/26/data_structure/" class="post-title-link" itemprop="url">数据结构与算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-03-26 17:58:24 / 修改时间：17:58:11" itemprop="dateCreated datePublished" datetime="2024-03-26T17:58:24+08:00">2024-03-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一步步整理各类算法问题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/03/26/data_structure/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/26/algorithms/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="CC2000">
-      <meta itemprop="description" content="Try to live your life right">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CC2000的精神时光屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/26/algorithms/" class="post-title-link" itemprop="url">数据结构与算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-03-26 17:58:24 / 修改时间：16:24:13" itemprop="dateCreated datePublished" datetime="2024-03-26T17:58:24+08:00">2024-03-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一步步整理各类算法问题</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/03/26/algorithms/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -321,10 +185,9 @@
       <meta itemprop="name" content="CC2000的精神时光屋">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/26/C++_c11/" class="post-title-link" itemprop="url">C++语言程序设计（郑莉第五版）第十一章课后习题代码实现</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          C++语言程序设计（郑莉第五版）第十一章课后习题代码实现
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -344,6 +207,13 @@
               </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -354,7 +224,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
+        <hr>
 <h1 id="第十一章-流类库与输入输出"><a href="#第十一章-流类库与输入输出" class="headerlink" title="第十一章 流类库与输入输出"></a>第十一章 流类库与输入输出</h1><h2 id="11-1-什么叫做流？流的提取和插入是指什么？I-O流在C-语言中起着怎样的作用？"><a href="#11-1-什么叫做流？流的提取和插入是指什么？I-O流在C-语言中起着怎样的作用？" class="headerlink" title="11-1 什么叫做流？流的提取和插入是指什么？I&#x2F;O流在C++语言中起着怎样的作用？"></a>11-1 什么叫做流？流的提取和插入是指什么？I&#x2F;O流在C++语言中起着怎样的作用？</h2><ul>
 <li>在C++中，将<strong>数据从一个对象到另一个对象的流动</strong>抽象为流。它负责<strong>在数据的生产者和数据的消费者之间建立联系，并管理数据的流动</strong>。对程序而言，<strong>流对象被看作是文件对象的化身</strong>。</li>
 <li>读操作被称为（从流中）<strong>提取</strong>；写操作被称为（向流中）<strong>插入</strong>。</li>
@@ -375,240 +245,37 @@
 <h3 id="main（）函数实现："><a href="#main（）函数实现：" class="headerlink" title="main（）函数实现："></a>main（）函数实现：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="function">Dog <span class="title">dog1</span><span class="params">(<span class="number">5</span>, <span class="number">10</span>)</span></span>;</span><br><span class="line">	<span class="function">ofstream <span class="title">fileout</span><span class="params">(<span class="string">&quot;DogLog&quot;</span>, ios_base::out | ios_base::binary)</span></span>;</span><br><span class="line">	fileout &lt;&lt; dog1;</span><br><span class="line">	fileout.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">	Dog dog2;</span><br><span class="line">	<span class="function">ifstream <span class="title">filein</span><span class="params">(<span class="string">&quot;DogLog&quot;</span>, ios_base::in|ios_base::binary)</span></span>;</span><br><span class="line">	filein &gt;&gt; dog2;</span><br><span class="line">	filein.<span class="built_in">close</span>();</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;dog2:&quot;</span> &lt;&lt; dog2 &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="11-7-观察下面的程序，说明每条语句的作用，写出程序执行的结果。"><a href="#11-7-观察下面的程序，说明每条语句的作用，写出程序执行的结果。" class="headerlink" title="11-7 观察下面的程序，说明每条语句的作用，写出程序执行的结果。"></a>11-7 观察下面的程序，说明每条语句的作用，写出程序执行的结果。</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios_base::fmtflags original_flags = cout.<span class="built_in">flags</span>();<span class="comment">//1</span></span><br><span class="line">	cout &lt;&lt; <span class="number">812</span> &lt;&lt; <span class="string">&#x27;|&#x27;</span>;</span><br><span class="line">	cout.<span class="built_in">setf</span>(ios_base::left, ios_base::adjustfield);<span class="comment">//2：设置为左对齐，填充字符填充右边</span></span><br><span class="line">	cout.<span class="built_in">width</span>(<span class="number">10</span>);<span class="comment">//3：设置下一次输出的数值字符宽度为10，不足用空格补齐</span></span><br><span class="line">	cout &lt;&lt; <span class="number">813</span> &lt;&lt; <span class="number">815</span> &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	cout.<span class="built_in">unsetf</span>(ios_base::adjustfield);<span class="comment">//4：取消设置的格式标志</span></span><br><span class="line">	cout.<span class="built_in">precision</span>(<span class="number">2</span>);</span><br><span class="line">	cout.<span class="built_in">setf</span>(ios_base::uppercase | ios_base::scientific);<span class="comment">//5：以科学计数法显示，并使用大写字母E（采用科学计数法表示，上行指令执行为显示小数点后两位）</span></span><br><span class="line">	cout &lt;&lt; <span class="number">831.0</span>;</span><br><span class="line">	cout.<span class="built_in">flags</span>(original_flags);<span class="comment">//6</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/C-%E8%AF%AD%E6%B3%95/" rel="tag"># C++语法</a>
+              <a href="/tags/%E6%B5%81%E7%B1%BB%E5%BA%93%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" rel="tag"># 流类库与输入输出</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/22/C++/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="CC2000">
-      <meta itemprop="description" content="Try to live your life right">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CC2000的精神时光屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/22/C++/" class="post-title-link" itemprop="url">C++语言程序设计（郑莉第五版）课后习题代码实现</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-03-22 14:24:24 / 修改时间：23:04:40" itemprop="dateCreated datePublished" datetime="2024-03-22T14:24:24+08:00">2024-03-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>复试在即，时隔多年重新系统的学习一遍C++，有了很多第一次学习时没有的收获...</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/03/22/C++/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/21/C++_c8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="CC2000">
-      <meta itemprop="description" content="Try to live your life right">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CC2000的精神时光屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/21/C++_c8/" class="post-title-link" itemprop="url">C++语言程序设计（郑莉第五版）第八章课后习题代码实现</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-03-21 23:05:38" itemprop="dateCreated datePublished" datetime="2024-03-21T23:05:38+08:00">2024-03-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-22 23:43:18" itemprop="dateModified" datetime="2024-03-22T23:43:18+08:00">2024-03-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>多态：同样的消息被不同类型的对象接收时导致完全不同的行为。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/03/21/C++_c8/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/03/22/C++/" rel="prev" title="C++语言程序设计（郑莉第五版）课后习题代码实现">
+      <i class="fa fa-chevron-left"></i> C++语言程序设计（郑莉第五版）课后习题代码实现
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/03/26/algorithms/" rel="next" title="数据结构与算法">
+      数据结构与算法 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/20/Hello/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="CC2000">
-      <meta itemprop="description" content="Try to live your life right">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CC2000的精神时光屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/03/20/Hello/" class="post-title-link" itemprop="url">Hello</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-03-20 14:47:25" itemprop="dateCreated datePublished" datetime="2024-03-20T14:47:25+08:00">2024-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-23 00:03:47" itemprop="dateModified" datetime="2024-03-23T00:03:47+08:00">2024-03-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Hello~</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/03/20/Hello/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -661,6 +328,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E6%B5%81%E7%B1%BB%E5%BA%93%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-text">第十一章 流类库与输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-%E4%BB%80%E4%B9%88%E5%8F%AB%E5%81%9A%E6%B5%81%EF%BC%9F%E6%B5%81%E7%9A%84%E6%8F%90%E5%8F%96%E5%92%8C%E6%8F%92%E5%85%A5%E6%98%AF%E6%8C%87%E4%BB%80%E4%B9%88%EF%BC%9FI-O%E6%B5%81%E5%9C%A8C-%E8%AF%AD%E8%A8%80%E4%B8%AD%E8%B5%B7%E7%9D%80%E6%80%8E%E6%A0%B7%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-text">11-1 什么叫做流？流的提取和插入是指什么？I&#x2F;O流在C++语言中起着怎样的作用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-cout%E3%80%81cerr%E5%92%8Cclog%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-text">11-2 cout、cerr和clog有何区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3-%E4%BD%BF%E7%94%A8I-O%E6%B5%81%E4%BB%A5%E6%96%87%E6%9C%AC%E6%96%B9%E5%BC%8F%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6test1-txt%EF%BC%8C%E5%86%99%E5%85%A5%E5%AD%97%E7%AC%A6%E2%80%9C%E5%B7%B2%E6%88%90%E5%8A%9F%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6%EF%BC%81%E2%80%9D%EF%BC%8C%E7%94%A8%E5%85%B6%E4%BB%96%E5%AD%97%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F%E6%89%93%E5%BC%80%EF%BC%8C%E7%9C%8B%E7%9C%8B%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%E5%86%99%E5%85%A5%E3%80%82"><span class="nav-text">11-3 使用I&#x2F;O流以文本方式建立一个文件test1.txt，写入字符“已成功写入文件！”，用其他字处理程序打开，看看是否正确写入。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-4-%E4%BD%BF%E7%94%A8I-O%E6%B5%81%E4%BB%A5%E6%96%87%E6%9C%AC%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%8011-3%E9%A2%98%E5%BB%BA%E7%AB%8B%E7%9A%84%E6%96%87%E4%BB%B6test1-txt%EF%BC%8C%E8%AF%BB%E5%87%BA%E5%85%B6%E5%86%85%E5%AE%B9%E5%B9%B6%E6%98%BE%E7%A4%BA%E5%87%BA%E6%9D%A5%EF%BC%8C%E7%9C%8B%E7%9C%8B%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%E3%80%82"><span class="nav-text">11-4 使用I&#x2F;O流以文本方式打开11-3题建立的文件test1.txt，读出其内容并显示出来，看看是否正确。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-5-%E4%BD%BF%E7%94%A8I-O%E6%B5%81%E4%BB%A5%E6%96%87%E6%9C%AC%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%8011-3%E9%A2%98%E5%BB%BA%E7%AB%8B%E7%9A%84%E6%96%87%E4%BB%B6test1-txt%EF%BC%8C%E5%9C%A8%E6%96%87%E4%BB%B6%E5%90%8E%E9%9D%A2%E6%B7%BB%E5%8A%A0%E5%AD%97%E7%AC%A6%E2%80%9C%E5%B7%B2%E6%88%90%E5%8A%9F%E6%B7%BB%E5%8A%A0%E5%AD%97%E7%AC%A6%EF%BC%81%E2%80%9D%EF%BC%8C%E7%84%B6%E5%90%8E%E8%AF%BB%E5%87%BA%E6%95%B4%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA%E5%87%BA%E6%9D%A5%EF%BC%8C%E7%9C%8B%E7%9C%8B%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A1%AE%E3%80%82"><span class="nav-text">11-5 使用I&#x2F;O流以文本方式打开11-3题建立的文件test1.txt，在文件后面添加字符“已成功添加字符！”，然后读出整个文件的内容显示出来，看看是否正确。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-6-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AADog%E7%B1%BB%EF%BC%8C%E5%8C%85%E5%90%AB%E4%BD%93%E9%87%8D%E5%92%8C%E5%B9%B4%E9%BE%84%E4%B8%A4%E4%B8%AA%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%8F%8A%E7%9B%B8%E5%BA%94%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%EF%BC%8C%E5%A3%B0%E6%98%8E%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8Bdog1%EF%BC%8C%E4%BD%93%E9%87%8D%E4%B8%BA5%EF%BC%8C%E5%B9%B4%E9%BE%84%E4%B8%BA10%EF%BC%8C%E4%BD%BF%E7%94%A8I-O%E6%B5%81%E6%8A%8Adog1%E7%9A%84%E7%8A%B6%E6%80%81%E5%86%99%E5%85%A5%E7%A3%81%E7%9B%98%E6%96%87%E4%BB%B6%EF%BC%8C%E5%86%8D%E5%A3%B0%E6%98%8E%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BE%8Bdog2%EF%BC%8C%E9%80%9A%E8%BF%87%E8%AF%BB%E6%96%87%E4%BB%B6%E6%8A%8Adog1%E7%9A%84%E7%8A%B6%E6%80%81%E8%B5%8B%E7%BB%99dog2-%E5%88%86%E5%88%AB%E4%BD%BF%E7%94%A8%E6%96%87%E6%9C%AC%E6%96%B9%E5%BC%8F%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%EF%BC%8C%E7%9C%8B%E7%9C%8B%E7%BB%93%E6%9E%9C%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%EF%BC%9B%E5%86%8D%E7%9C%8B%E7%9C%8B%E7%A3%81%E7%9B%98%E6%96%87%E4%BB%B6%E7%9A%84ASCII%E7%A0%81%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C%E3%80%82"><span class="nav-text">11-6 定义一个Dog类，包含体重和年龄两个成员变量及相应的成员函数，声明一个实例dog1，体重为5，年龄为10，使用I&#x2F;O流把dog1的状态写入磁盘文件，再声明一个实例dog2，通过读文件把dog1的状态赋给dog2.分别使用文本方式和二进制方式操作文件，看看结果有何不同；再看看磁盘文件的ASCII码有何不同。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dog%E7%B1%BB%E5%A3%B0%E6%98%8E%EF%BC%9A"><span class="nav-text">Dog类声明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-text">main（）函数实现：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-7-%E8%A7%82%E5%AF%9F%E4%B8%8B%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%8C%E8%AF%B4%E6%98%8E%E6%AF%8F%E6%9D%A1%E8%AF%AD%E5%8F%A5%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%8C%E5%86%99%E5%87%BA%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%9A%84%E7%BB%93%E6%9E%9C%E3%80%82"><span class="nav-text">11-7 观察下面的程序，说明每条语句的作用，写出程序执行的结果。</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
