@@ -21,20 +21,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="复试在即，时隔多年重新系统的学习一遍C++，有了很多第一次学习时没有的收获...">
+  <meta name="description" content="排序相关算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++语言程序设计（郑莉第五版）课后习题代码实现">
-<meta property="og:url" content="http://example.com/2024/03/22/C++/index.html">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://example.com/2024/03/28/sort/index.html">
 <meta property="og:site_name" content="CC2000的精神时光屋">
-<meta property="og:description" content="复试在即，时隔多年重新系统的学习一遍C++，有了很多第一次学习时没有的收获...">
+<meta property="og:description" content="排序相关算法">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-22T06:24:24.828Z">
-<meta property="article:modified_time" content="2024-03-28T10:42:46.472Z">
+<meta property="article:published_time" content="2024-03-28T10:33:00.400Z">
+<meta property="article:modified_time" content="2024-03-28T10:36:25.960Z">
 <meta property="article:author" content="CC2000">
-<meta property="article:tag" content="C++语法">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2024/03/22/C++/">
+<link rel="canonical" href="http://example.com/2024/03/28/sort/">
 
 
 <script id="page-configurations">
@@ -47,7 +48,7 @@
   };
 </script>
 
-  <title>C++语言程序设计（郑莉第五版）课后习题代码实现 | CC2000的精神时光屋</title>
+  <title>排序算法 | CC2000的精神时光屋</title>
   
 
 
@@ -172,7 +173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/22/C++/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/28/sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -185,7 +186,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          C++语言程序设计（郑莉第五版）课后习题代码实现
+          排序算法
         </h1>
 
         <div class="post-meta">
@@ -194,24 +195,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-03-22 14:24:24" itemprop="dateCreated datePublished" datetime="2024-03-22T14:24:24+08:00">2024-03-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-28 18:42:46" itemprop="dateModified" datetime="2024-03-28T18:42:46+08:00">2024-03-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
+              <time title="创建时间：2024-03-28 18:33:00 / 修改时间：18:36:25" itemprop="dateCreated datePublished" datetime="2024-03-28T18:33:00+08:00">2024-03-28</time>
             </span>
 
           
@@ -222,7 +208,7 @@
               <span class="post-meta-item-text">阅读次数：</span>
               <span id="busuanzi_value_page_pv"></span>
             </span>
-            <div class="post-description">复试在即，时隔多年重新系统的学习一遍C++，有了很多第一次学习时没有的收获...</div>
+            <div class="post-description">排序相关算法</div>
 
         </div>
       </header>
@@ -233,12 +219,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>说在前面：</strong></p>
-<p>复试在即，时隔多年重新系统的学习一遍C++，有了很多第一次学习时没有的收获（<em>废话，第一次学的时候课上基本都是睡过去的！</em>）。将学习期间做的练习更新至此，以期对未来的自己和他人有所帮助。</p>
-<p>由于决定创建精神时光屋时，C++的学习已经接近尾声， 为了不耽误自己学习的节奏，因此更新的顺序并非是从前到后，而是先从最近刚刚做完的习题开始更新，等将来空闲再将前面的内容一并补充。</p>
-<h1 id="第八章-多态性"><a href="#第八章-多态性" class="headerlink" title="第八章 多态性"></a>第八章 多态性</h1><p><a target="_blank" rel="noopener" href="http://cc2000.xyz/2024/03/21/C++_c8">C++语言程序设计（郑莉第五版）第八章课后习题代码实现</a></p>
-<h1 id="第十一章-流类库与输入输出"><a href="#第十一章-流类库与输入输出" class="headerlink" title="第十一章 流类库与输入输出"></a>第十一章 流类库与输入输出</h1><p><a target="_blank" rel="noopener" href="http://localhost:4000/2024/03/26/C++_c11">C++语言程序设计（郑莉第五版）第十一章章课后习题代码实现</a></p>
-
+        <h1 id="排序方法分类"><a href="#排序方法分类" class="headerlink" title="排序方法分类"></a>排序方法分类</h1><ul>
+<li>插入类：插入排序、希尔排序</li>
+<li>交换类：冒泡排序、选择排序</li>
+<li>选择类：简单选择排序、堆排序</li>
+<li>归并类：归并排序</li>
+<li>分配类：基数排序</li>
+</ul>
+<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>以升序排列为例，代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要传入的参数有：待排序数组a[]、数组长度size</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">InsertSort</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//从第二个元素开始遍历插入（只有一个元素时，其本身就是有序的，因此不用从第一个元素开始遍历）</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; size; i++) &#123;</span><br><span class="line">		<span class="type">int</span> temp = a[i], j;</span><br><span class="line">        <span class="comment">//把所有大于本次选取元素的元素向后移动一个位置</span></span><br><span class="line">		<span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span> &amp;&amp; temp &lt; a[j]; j--)</span><br><span class="line">			a[j + <span class="number">1</span>] = a[j];</span><br><span class="line">        <span class="comment">//上述循环结束之后，j+1就是本次选取元素应该插入的位置</span></span><br><span class="line">		a[j + <span class="number">1</span>] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>递归实现代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">InsertSort_digui</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> size)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//只有一个元素时，其本身就是有序的,直接return</span></span><br><span class="line">    <span class="keyword">if</span> (size == <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//先将数组a[]前size-1个元素调整为有序</span></span><br><span class="line">	<span class="built_in">InsertSort_digui</span>(a, size - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//之后的操作与循环遍历实现的过程相同</span></span><br><span class="line">	<span class="type">int</span> temp = a[size - <span class="number">1</span>], j;</span><br><span class="line">	<span class="keyword">for</span> (j = size - <span class="number">2</span>; j &gt;= <span class="number">0</span> &amp;&amp; temp &lt; a[j]; j--) </span><br><span class="line">		a[j + <span class="number">1</span>] = a[j];</span><br><span class="line">	a[j + <span class="number">1</span>] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>以升序排列为例，代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> size)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//添加布尔型变量flag，为false时表示数组还不是完全有序，需要继续进入循环排序</span></span><br><span class="line">	<span class="type">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size - <span class="number">1</span> &amp;&amp; !flag; i++) &#123;</span><br><span class="line">		<span class="comment">//每次进入循环，先把flag值修改为true</span></span><br><span class="line">		flag = <span class="literal">true</span>;</span><br><span class="line">		<span class="comment">//从数组最末端元素开始向前比较</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = size - <span class="number">1</span>; j &gt; i; j--)</span><br><span class="line">		<span class="comment">//将较小值交换至前面，若发生交换，将flag修改为false</span></span><br><span class="line">			<span class="keyword">if</span> (a[j] &lt; a[j - <span class="number">1</span>]) &#123;</span><br><span class="line">				<span class="type">int</span> temp = a[j];</span><br><span class="line">				a[j] = a[j - <span class="number">1</span>];</span><br><span class="line">				a[j - <span class="number">1</span>] = temp;</span><br><span class="line">				flag = <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>递归实现代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//更确切的说这个应该叫做“沉石排序”，因为这里的思路是从末端开始向前完成排序</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">BubbleSort_digui</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> size)</span> </span>&#123;</span><br><span class="line">	<span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; size - <span class="number">1</span>; j++)</span><br><span class="line">			<span class="keyword">if</span> (a[j] &gt; a[j + <span class="number">1</span>]) &#123;</span><br><span class="line">				<span class="type">int</span> temp = a[j];</span><br><span class="line">				a[j] = a[j + <span class="number">1</span>];</span><br><span class="line">				a[j + <span class="number">1</span>] = temp;</span><br><span class="line">				flag = <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">	<span class="comment">//若flag为true，说明整个数组已经是有序的了，直接return</span></span><br><span class="line">	<span class="keyword">if</span> (flag) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">BubbleSort_digui</span>(a, size - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QuickSort</span><span class="params">(<span class="type">int</span> a[], <span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//left == right，说明此次需要排序的部分只有一个元素，其本身是有序的，直接return</span></span><br><span class="line">	<span class="keyword">if</span> (left == right) <span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> flagNum = a[left], low = left, high = right;</span><br><span class="line">	<span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">		<span class="keyword">while</span> (low &lt; high &amp;&amp; a[high] &gt;= flagNum) high--;</span><br><span class="line">		a[low] = a[high];</span><br><span class="line">		<span class="keyword">while</span> (low &lt; high &amp;&amp; a[low] &lt;= flagNum) low++;</span><br><span class="line">		a[high] = a[low];</span><br><span class="line">	&#125;</span><br><span class="line">	a[low] = flagNum;</span><br><span class="line">	<span class="built_in">QuickSort</span>(a, left, low - <span class="number">1</span>);</span><br><span class="line">	<span class="built_in">QuickSort</span>(a, low + <span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -247,7 +237,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C-%E8%AF%AD%E6%B3%95/" rel="tag"># C++语法</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag"># 排序</a>
           </div>
 
         
@@ -256,13 +247,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/03/21/C++_c8/" rel="prev" title="C++语言程序设计（郑莉第五版）第八章课后习题代码实现">
-      <i class="fa fa-chevron-left"></i> C++语言程序设计（郑莉第五版）第八章课后习题代码实现
+    <a href="/2024/03/26/data_structure/" rel="prev" title="数据结构类算法">
+      <i class="fa fa-chevron-left"></i> 数据结构类算法
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/03/26/C++_c11/" rel="next" title="C++语言程序设计（郑莉第五版）第十一章课后习题代码实现">
-      C++语言程序设计（郑莉第五版）第十一章课后习题代码实现 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -321,7 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-text">第八章 多态性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-%E6%B5%81%E7%B1%BB%E5%BA%93%E4%B8%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-text">第十一章 流类库与输入输出</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-text">排序方法分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="nav-text">快速排序</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
