@@ -227,8 +227,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>安装与配置教程：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1705262">PHP安装配置(Windows和Linux)-一篇就够了</a></p>
-<p>需要注意：当前（2024.04.15），php最新版本为8.3.6，故配置过程要修改成下面内容（路径根据实际情况修改）：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#加载PHP</span><br><span class="line">LoadModule php_module <span class="string">&#x27;D:/tools/php8/php8apache2_4.dll&#x27;</span></span><br><span class="line"></span><br><span class="line">#将PHP配置文件加载到Apache配置文件中，共同生效</span><br><span class="line">PHPIniDir <span class="string">&#x27;D:/tools/php8&#x27;</span></span><br><span class="line"></span><br><span class="line">#配置Apache分配工作给PHP模块，把PHP代码交给PHP处理</span><br><span class="line">#即.php后缀名的文件</span><br><span class="line">AddType application/x-httpd-php .php</span><br></pre></td></tr></table></figure></p>
+        <p>安装与配置教程：<a
+target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1705262">PHP安装配置(Windows和Linux)-一篇就够了</a></p>
+<p>需要注意：当前（2024.04.15），php最新版本为8.3.6，故配置过程要修改成下面内容（路径根据实际情况修改）：
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#加载PHP</span><br><span class="line">LoadModule php_module <span class="string">&#x27;D:/tools/php8/php8apache2_4.dll&#x27;</span></span><br><span class="line"></span><br><span class="line">#将PHP配置文件加载到Apache配置文件中，共同生效</span><br><span class="line">PHPIniDir <span class="string">&#x27;D:/tools/php8&#x27;</span></span><br><span class="line"></span><br><span class="line">#配置Apache分配工作给PHP模块，把PHP代码交给PHP处理</span><br><span class="line">#即.php后缀名的文件</span><br><span class="line">AddType application/x-httpd-php .php</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
