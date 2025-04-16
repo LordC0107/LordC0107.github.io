@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.1.1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="PPRF Puncturable Pseudorandom Function（可穿刺伪随机函数，PPRF）是一种特殊的伪随机函数（PRF），它允许生成一个“穿刺密钥”，该密钥可以在除了指定点之外的所有点上评估PRF。 定义  主密钥与穿刺密钥：PPRF有一个主密钥 ( k )，可以用来在定义域的所有点上评估PRF。而通过主密钥 ( k ) 和某个特定点 ( x )，可以生成一个穿刺密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学原语总结">
+<meta property="og:url" content="http://example.com/2025/03/23/20250323b/index.html">
+<meta property="og:site_name" content="CC2000的精神时光屋">
+<meta property="og:description" content="PPRF Puncturable Pseudorandom Function（可穿刺伪随机函数，PPRF）是一种特殊的伪随机函数（PRF），它允许生成一个“穿刺密钥”，该密钥可以在除了指定点之外的所有点上评估PRF。 定义  主密钥与穿刺密钥：PPRF有一个主密钥 ( k )，可以用来在定义域的所有点上评估PRF。而通过主密钥 ( k ) 和某个特定点 ( x )，可以生成一个穿刺密">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-07T13:20:20.854Z">
+<meta property="article:author" content="CC2000">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="原语">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/03/23/20250323b/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>密码学原语总结 | CC2000的精神时光屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">CC2000的精神时光屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/23/20250323b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="CC2000">
+      <meta itemprop="description" content="Try to live your life right">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CC2000的精神时光屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          密码学原语总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-03-23 00:00:00" itemprop="dateCreated datePublished" datetime="2025-03-23T00:00:00+08:00">2025-03-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-07 21:20:20" itemprop="dateModified" datetime="2025-04-07T21:20:20+08:00">2025-04-07</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="pprf">PPRF</h2>
+<p>Puncturable Pseudorandom
+Function（可穿刺伪随机函数，PPRF）是一种特殊的伪随机函数（PRF），它允许生成一个“穿刺密钥”，该密钥可以在除了指定点之外的所有点上评估PRF。</p>
+<h3 id="定义">定义</h3>
+<ul>
+<li><strong>主密钥与穿刺密钥</strong>：PPRF有一个主密钥 ( k
+)，可以用来在定义域的所有点上评估PRF。而通过主密钥 ( k ) 和某个特定点 (
+x )，可以生成一个穿刺密钥 ( k_x )，使用 ( k_x ) 无法评估PRF在点 ( x )
+上的值。</li>
+<li><strong>算法</strong>：PPRF由三个算法组成：
+<ul>
+<li><strong>Setup（初始化）</strong>：输入安全参数，输出PRF的主密钥。</li>
+<li><strong>Puncture（穿刺）</strong>：输入主密钥和一个点 ( x
+)，输出一个穿刺密钥 ( k_x )。</li>
+<li><strong>Eval（评估）</strong>：输入穿刺密钥 ( k_x ) 和一个点 ( x'
+)，如果 ( x' x )，则输出PRF在 ( x' ) 上的值；如果 ( x' = x
+)，则输出一个特殊符号（如 ()），表示无法评估。</li>
+</ul></li>
+</ul>
+<h3 id="举例">举例</h3>
+<p>假设有一个可穿刺伪随机函数(F)，它的主密钥为(k)，可用于评估(F_k(x))。若想撤销在(x=01001011)点评估(F)的能力，可以生成一个和(x)相关的穿刺密钥(k^<em>)，使得(F_k(x)
+= F_{k^</em>}(x), x)且(F_k(x) F_{k^<em>}(x), x =
+01001011)。此外，(k^</em>)不会泄露关于(x=01001011)处的(F_k(x))的任何信息。</p>
+<h3 id="安全性">安全性</h3>
+<p>PPRF的安全性要求即使攻击者获得了穿刺密钥 ( k_x )，也无法从 ( k_x )
+中推断出PRF在点 ( x ) 上的值。此外，PPRF还需要满足适应性安全性（Adaptive
+Security），即攻击者可以在获得穿刺密钥后动态选择挑战点。</p>
+<h3 id="应用">应用</h3>
+<p>PPRF在密码学中有多种应用，包括： - <strong>前向保密（Forward
+Secrecy）</strong>：通过穿刺密钥可以撤销对某些点的访问能力，从而保护过去的信息。
+- <strong>密钥撤销（Key
+Revocation）</strong>：可以撤销对特定数据的访问权限。 -
+<strong>混淆（Obfuscation）</strong>：用于隐藏某些特定点的函数值。</p>
+<p>PPRF的研究和应用是密码学中的一个重要方向，它结合了伪随机性和密钥管理的灵活性。</p>
+<h2 id="mpcith">MPCitH</h2>
+<h2 id="rsd">RSD</h2>
+<p>Regular Syndrome
+Decoding（RSD，规则综合解码）是综合解码问题（Syndrome Decoding
+Problem，SDP）的一个变体。以下是关于它的详细介绍：</p>
+<h3 id="定义-1">定义</h3>
+<ul>
+<li>给定一个线性码的校验矩阵 ( _2^{(n-k) n}) 和一个向量（综合）(
+_2^{n-k})，RSD问题要求找到一个向量 ( _2^n)，其汉明重量为 (w)，并且满足 (
+= )，同时 () 是规则的。</li>
+<li>规则向量 () 的定义是：它可以被划分为 (w)
+个连续的、等大小的块，每个块的汉明重量恰好为1。</li>
+</ul>
+<h3 id="特点">特点</h3>
+<ul>
+<li><strong>结构化错误分布</strong>：与普通的综合解码问题相比，RSD问题中的错误向量
+()
+具有特定的结构，即规则分布。这种结构化使得RSD问题在某些情况下可能比普通SDP更容易解决，但在其他情况下也可能更难。</li>
+<li><strong>应用广泛</strong>：RSD问题在密码学中有着重要应用，例如在多方计算（MPC）、零知识证明（ZK）以及伪随机相关生成器（PCG）等场景中。</li>
+</ul>
+<h3 id="研究进展">研究进展</h3>
+<ul>
+<li><strong>攻击方法</strong>：近年来，针对RSD问题的攻击方法不断涌现。例如，有研究提出了基于Gröbner基的攻击方法，还有研究通过改进信息集解码（ISD）技术来攻击RSD问题。</li>
+<li><strong>复杂度分析</strong>：对于RSD问题的复杂度，研究者们进行了深入分析。例如，某些特定参数下的RSD实例可以在多项式时间内解决，而另一些参数则会导致特别难解的实例。</li>
+</ul>
+<h3 id="与sdp的关系">与SDP的关系</h3>
+<ul>
+<li>RSD问题是SDP的一个特殊变体，其主要区别在于错误向量的结构化要求。这种结构化可能会对问题的难度产生影响，但具体影响因参数而异。</li>
+</ul>
+<p>总之，Regular Syndrome
+Decoding是一个具有特定结构的综合解码问题，它在密码学中具有重要应用，并且其安全性仍在不断研究中。</p>
+<h2 id="omuf">OMUF</h2>
+<p><strong>OMUF</strong> 是密码学中的一个术语，通常指 <strong>One-More
+UnForgeability</strong>（一次性多不可伪造性）。这一概念主要用于描述某些签名方案或认证协议在面临多次挑战时的安全性，尤其是在攻击者能够进行多次查询的情况下，系统仍能保持不可伪造性。以下是详细解析：</p>
+<h3 id="omuf-的核心定义"><strong>1. OMUF 的核心定义</strong></h3>
+<ul>
+<li><strong>基本场景</strong>：攻击者（Adversary）可向签名预言机（Signing
+Oracle）发起多次签名请求，目标是伪造至少一个未被查询过的消息的合法签名。</li>
+<li><strong>安全性要求</strong>：即使攻击者获取了 ( n )
+个消息的签名，也无法生成第 ( n+1 ) 个有效签名。</li>
+<li><strong>类比模型</strong>：类似于“One-More 假设”（如 RSA 的 One-More
+困难问题），要求攻击者必须付出与挑战次数成比例的计算资源。</li>
+</ul>
+<h3 id="应用领域"><strong>2. 应用领域</strong></h3>
+<ul>
+<li><strong>数字签名方案</strong>：<br />
+例如，Schnorr 签名、BLS 签名等需证明在 OMUF
+模型下安全，确保攻击者无法通过多次查询获得伪造能力。</li>
+<li><strong>盲签名协议</strong>：<br />
+在电子投票或匿名支付中，用户需对消息盲化后请求签名，OMUF
+保证即使多次交互，签名者也无法伪造额外签名。</li>
+<li><strong>抗量子算法设计</strong>：<br />
+后量子签名方案（如基于哈希的签名）常需满足 OMUF
+以抵御量子计算攻击。</li>
+</ul>
+<h3 id="与其他安全模型的对比"><strong>3.
+与其他安全模型的对比</strong></h3>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 13%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>安全模型</strong></th>
+<th><strong>缩写</strong></th>
+<th><strong>关键区别</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>选择性不可伪造性</td>
+<td>SUF</td>
+<td>攻击者需提前声明挑战消息</td>
+</tr>
+<tr class="even">
+<td>适应性不可伪造性</td>
+<td>EUF-CMA</td>
+<td>攻击者可自适应选择查询消息</td>
+</tr>
+<tr class="odd">
+<td><strong>一次性多不可伪造性</strong></td>
+<td><strong>OMUF</strong></td>
+<td>攻击者在多次查询后仍需伪造额外签名</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>OMUF 更强</strong>：相比 EUF-CMA（Existential Unforgeability
+under Chosen Message Attacks），OMUF
+要求即使攻击者已获取多个签名，仍无法伪造新的签名，适用于动态多用户环境。</li>
+</ul>
+<h3 id="典型构造与证明技术"><strong>4. 典型构造与证明技术</strong></h3>
+<ul>
+<li><strong>基于零知识证明</strong>：<br />
+如 Fiat-Shamir 变换可将交互式协议转为非交互式，同时满足 OMUF（例如
+Schnorr 签名）。</li>
+<li><strong>树形结构扩展</strong>：<br />
+在哈希树（Merkle
+Tree）中绑定多个签名状态，确保每次签名需“消耗”一个叶子节点，防止重放攻击。</li>
+<li><strong>随机预言机模型（ROM）</strong>：<br />
+多数 OMUF 证明依赖 ROM 假设，将哈希函数视为理想随机函数。</li>
+</ul>
+<h3 id="实际攻击案例与防护"><strong>5. 实际攻击案例与防护</strong></h3>
+<ul>
+<li><strong>重放攻击</strong>：<br />
+若签名方案不满足 OMUF，攻击者可重复使用旧签名伪造新消息。<br />
+<strong>防护</strong>：添加时间戳或唯一 nonce。</li>
+<li><strong>密钥泄露</strong>：<br />
+前向安全（Forward Security）可增强
+OMUF，即使长期密钥泄漏，历史签名仍安全。<br />
+<strong>实现</strong>：基于树状密钥演化（如 XMSS 签名）。</li>
+</ul>
+<h3 id="总结"><strong>6. 总结</strong></h3>
+<p><strong>OMUF</strong>
+是衡量密码协议在多次挑战下安全性的重要指标，尤其在多用户、高交互场景（如区块链或物联网）中至关重要。设计满足
+OMUF
+的方案需结合零知识证明、前向安全等技术，并在随机预言机或标准模型下严格证明其安全性。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"># 密码学</a>
+              <a href="/tags/%E5%8E%9F%E8%AF%AD/" rel="tag"># 原语</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/04/StillAlive/" rel="prev" title="报平安">
+      <i class="fa fa-chevron-left"></i> 报平安
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/03/25/20250325a/" rel="next" title="历史经济百科">
+      历史经济百科 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pprf"><span class="nav-text">PPRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-text">举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mpcith"><span class="nav-text">MPCitH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsd"><span class="nav-text">RSD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%B1%95"><span class="nav-text">研究进展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8Esdp%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">与SDP的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#omuf"><span class="nav-text">OMUF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#omuf-%E7%9A%84%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89"><span class="nav-text">1. OMUF 的核心定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="nav-text">2. 应用领域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-text">3.
+与其他安全模型的对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E6%9E%84%E9%80%A0%E4%B8%8E%E8%AF%81%E6%98%8E%E6%8A%80%E6%9C%AF"><span class="nav-text">4. 典型构造与证明技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B%E4%B8%8E%E9%98%B2%E6%8A%A4"><span class="nav-text">5. 实际攻击案例与防护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">6. 总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CC2000"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">CC2000</p>
+  <div class="site-description" itemprop="description">Try to live your life right</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/cang-ying-72-98" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;cang-ying-72-98" rel="noopener" target="_blank"><i class="fa fa-comment fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-03 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CC2000</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider"></span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+<br />
+
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("3/20/2024 12:00:00"); //修改为你的网站开始运行的时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
