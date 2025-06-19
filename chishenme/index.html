@@ -372,14 +372,21 @@
     </div>
 
     <script>
+        // 默认食物数据（驴打滚）
+        const DEFAULT_FOOD = {
+            name: "驴打滚",
+            calories: 198,
+            unit: "per100g"
+        };
+        
         // 当前选择的餐别
         let currentMeal = 'breakfast';
         
         // 数据结构：按餐别存储食物列表
         let mealData = {
-            breakfast: JSON.parse(localStorage.getItem('breakfastFoods')) || [],
-            lunch: JSON.parse(localStorage.getItem('lunchFoods')) || [],
-            dinner: JSON.parse(localStorage.getItem('dinnerFoods')) || []
+            breakfast: JSON.parse(localStorage.getItem('breakfastFoods')) || [DEFAULT_FOOD],
+            lunch: JSON.parse(localStorage.getItem('lunchFoods')) || [DEFAULT_FOOD],
+            dinner: JSON.parse(localStorage.getItem('dinnerFoods')) || [DEFAULT_FOOD]
         };
         
         // DOM元素
@@ -590,10 +597,13 @@
         
         function resetAllData() {
             if (confirm('确定要重置所有餐别的数据吗？此操作不可恢复！')) {
-                mealData = { breakfast: [], lunch: [], dinner: [] };
-                localStorage.removeItem('breakfastFoods');
-                localStorage.removeItem('lunchFoods');
-                localStorage.removeItem('dinnerFoods');
+                // 重置为只包含默认食物
+                mealData = {
+                    breakfast: [DEFAULT_FOOD],
+                    lunch: [DEFAULT_FOOD],
+                    dinner: [DEFAULT_FOOD]
+                };
+                saveFoods();
                 renderFoodGrid();
                 resetDisplay();
                 showToast('已重置所有数据');
