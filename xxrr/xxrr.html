@@ -1,1 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香香软软程度测试</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial Rounded MT Bold', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+            color: #5a3e36;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #e83e8c;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .intro {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .question-container {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #8b4513;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: #f9f3f7;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background: #f5e1ed;
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            background: #ffd1dc;
+            border-color: #e83e8c;
+        }
+        
+        .option input {
+            display: none;
+        }
+        
+        .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e83e8c;
+            border-radius: 50%;
+            margin-right: 12px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .option.selected .custom-radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: #e83e8c;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .option-text {
+            font-size: 1rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #f0d9e5;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ffb6c1, #e83e8c);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #prev-btn {
+            background: #f0d9e5;
+            color: #8b4513;
+        }
+        
+        #next-btn, #submit-btn {
+            background: #e83e8c;
+            color: white;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            color: #e83e8c;
+            margin-bottom: 20px;
+        }
+        
+        .result-level {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #8b4513;
+        }
+        
+        .result-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .result-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #ffe6f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+        
+        #restart-btn {
+            background: #8b4513;
+            color: white;
+            margin-top: 20px;
+        }
+        
+        .question-counter {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #e83e8c;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌸 香香软软程度测试 🌸</h1>
+            <p class="intro">回答以下15道选择题，根据你的真实情况选择最符合的选项。测试结果将揭示你的香香软软等级！</p>
+        </header>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <div class="question-counter" id="question-counter">第1题/共15题</div>
+        
+        <form id="quiz-form">
+            <!-- 题目将通过JavaScript动态生成 -->
+        </form>
+        
+        <div class="buttons">
+            <button id="prev-btn" disabled>上一题</button>
+            <button id="next-btn">下一题</button>
+            <button id="submit-btn" style="display: none;">查看结果</button>
+        </div>
+        
+        <div class="result-container" id="result-container">
+            <div class="result-title">你的测试结果</div>
+            <div class="result-level" id="result-level"></div>
+            <div class="result-image" id="result-image">🌸</div>
+            <div class="result-desc" id="result-desc"></div>
+            <button id="restart-btn">重新测试</button>
+        </div>
+    </div>
 
+    <script>
+        // 测试题目数据
+        const questions = [
+            {
+                question: "你的护肤习惯更接近？",
+                options: [
+                    { text: "每日坚持保湿+香氛身体乳", score: 5 },
+                    { text: "偶尔涂抹护肤品，偏好清新淡香", score: 3 },
+                    { text: "基本不用，但喜欢干净清爽", score: 1 },
+                    { text: "完全随缘", score: 0 }
+                ]
+            },
+            {
+                question: "衣柜里的主导风格是？",
+                options: [
+                    { text: "棉麻、针织等柔软材质为主", score: 5 },
+                    { text: "混搭风，但必有柔软配饰（如围巾）", score: 3 },
+                    { text: "休闲舒适为主，材质不刻意选择", score: 1 },
+                    { text: "硬挺面料居多（如牛仔、西装）", score: 0 }
+                ]
+            },
+            {
+                question: "他人常形容你的气质是？",
+                options: [
+                    { text: "温柔得像棉花糖", score: 5 },
+                    { text: "亲和力强", score: 3 },
+                    { text: "清爽利落", score: 1 },
+                    { text: "高冷有距离感", score: 0 }
+                ]
+            },
+            {
+                question: "情绪波动时，你更倾向？",
+                options: [
+                    { text: "安静独处，听音乐/泡茶舒缓", score: 5 },
+                    { text: "找朋友倾诉或拥抱玩偶", score: 3 },
+                    { text: "运动发泄", score: 1 },
+                    { text: "直接表达情绪", score: 0 }
+                ]
+            },
+            {
+                question: "以下最吸引你的香气是？",
+                options: [
+                    { text: "白花香（茉莉、栀子）或奶香", score: 5 },
+                    { text: "果香（桃子、柑橘）或茶香", score: 3 },
+                    { text: "木质调（雪松、沉香）", score: 1 },
+                    { text: "几乎不在意气味", score: 0 }
+                ]
+            },
+            {
+                question: "睡前习惯包括？",
+                options: [
+                    { text: "香薰+柔光阅读+护肤流程", score: 5 },
+                    { text: "简单洗漱后放松入睡", score: 3 },
+                    { text: "刷手机直到困倦", score: 1 },
+                    { text: "熬夜处理事务", score: 0 }
+                ]
+            },
+            {
+                question: "社交场合中，你常扮演的角色？",
+                options: [
+                    { text: "调和气氛的治愈者", score: 5 },
+                    { text: "积极倾听的支持者", score: 3 },
+                    { text: "理性分析的问题解决者", score: 1 },
+                    { text: "主导话题的领导者", score: 0 }
+                ]
+            },
+            {
+                question: "对于毛茸茸小动物的反应？",
+                options: [
+                    { text: "忍不住想抚摸拥抱", score: 5 },
+                    { text: "觉得可爱但保持距离", score: 3 },
+                    { text: "无感", score: 1 },
+                    { text: "回避", score: 0 }
+                ]
+            },
+            {
+                question: "选择饮品时更倾向？",
+                options: [
+                    { text: "温润的花果茶或热牛奶", score: 5 },
+                    { text: "清甜果汁或奶茶", score: 3 },
+                    { text: "黑咖啡/功能性饮料", score: 1 },
+                    { text: "烈酒/浓茶", score: 0 }
+                ]
+            },
+            {
+                question: "压力大的解压方式？",
+                options: [
+                    { text: "泡澡、SPA或瑜伽", score: 5 },
+                    { text: "逛街、看电影", score: 3 },
+                    { text: "高强度运动", score: 1 },
+                    { text: "工作转移注意力", score: 0 }
+                ]
+            },
+            {
+                question: "理想中的房间装饰？",
+                options: [
+                    { text: "暖色调+地毯+抱枕", score: 5 },
+                    { text: "简约但有绿植和香薰", score: 3 },
+                    { text: "实用主义，整洁即可", score: 1 },
+                    { text: "冷工业风/极简", score: 0 }
+                ]
+            },
+            {
+                question: "说话的语气常被描述为？",
+                options: [
+                    { text: "轻柔缓慢", score: 5 },
+                    { text: "轻快活泼", score: 3 },
+                    { text: "干脆利落", score: 1 },
+                    { text: "铿锵有力", score: 0 }
+                ]
+            },
+            {
+                question: "对待他人的评价？",
+                options: [
+                    { text: "细腻敏感，容易共情", score: 5 },
+                    { text: "在意但会自我调整", score: 3 },
+                    { text: "理性过滤，选择性接受", score: 1 },
+                    { text: "几乎不受影响", score: 0 }
+                ]
+            },
+            {
+                question: "童年时最喜欢的玩具类型？",
+                options: [
+                    { text: "毛绒玩偶", score: 5 },
+                    { text: "可爱造型的娃娃/模型", score: 3 },
+                    { text: "积木/拼图", score: 1 },
+                    { text: "运动器械/电子设备", score: 0 }
+                ]
+            },
+            {
+                question: "身边人是否说过你好闻？",
+                options: [
+                    { text: "频繁提及", score: 5 },
+                    { text: "偶尔提到", score: 3 },
+                    { text: "极少", score: 1 },
+                    { text: "从未", score: 0 }
+                ]
+            }
+        ];
+
+        // 结果等级定义
+        const resultLevels = [
+            {
+                minScore: 65,
+                maxScore: 75,
+                level: "特级香软棉花糖",
+                desc: "温柔治愈系代表！你的存在如春风拂面，从内在气质到外在细节都充满柔软感，是朋友眼中的舒适源泉。",
+                emoji: "🍡"
+            },
+            {
+                minScore: 45,
+                maxScore: 64,
+                level: "一级甜暖小太阳",
+                desc: "亲和力满分！你善于营造轻松氛围，性格中自带暖意，稍加打理即可凸显香软特质。",
+                emoji: "☀️"
+            },
+            {
+                minScore: 25,
+                maxScore: 44,
+                level: "二级清爽琉璃糕",
+                desc: "干净利落中带软糯！你更追求高效与舒适平衡，虽不刻意温柔，但自然状态中透出清新感。",
+                emoji: "🍮"
+            },
+            {
+                minScore: 0,
+                maxScore: 24,
+                level: "三级韧感云杉木",
+                desc: "外刚内柔型！你的香软藏于深处，需特定情境才会展现（如对待挚友或宠物），本质是富有保护感的柔软。",
+                emoji: "🌲"
+            }
+        ];
+
+        // 初始化变量
+        let currentQuestion = 0;
+        const userAnswers = new Array(questions.length);
+        
+        // DOM元素
+        const quizForm = document.getElementById('quiz-form');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressBar = document.getElementById('progress');
+        const questionCounter = document.getElementById('question-counter');
+        const resultContainer = document.getElementById('result-container');
+        const resultLevel = document.getElementById('result-level');
+        const resultDesc = document.getElementById('result-desc');
+        const resultImage = document.getElementById('result-image');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        // 初始化测试
+        function initQuiz() {
+            displayQuestion();
+            updateProgressBar();
+            updateButtons();
+        }
+        
+        // 显示当前题目
+        function displayQuestion() {
+            questionCounter.textContent = `第${currentQuestion + 1}题/共${questions.length}题`;
+            
+            const question = questions[currentQuestion];
+            let questionHTML = `
+                <div class="question-container">
+                    <div class="question">${question.question}</div>
+                    <div class="options">
+            `;
+            
+            question.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                questionHTML += `
+                    <label class="option ${isSelected ? 'selected' : ''}">
+                        <input type="radio" name="answer" value="${index}" ${isSelected ? 'checked' : ''}>
+                        <span class="custom-radio"></span>
+                        <span class="option-text">${option.text}</span>
+                    </label>
+                `;
+            });
+            
+            questionHTML += `</div></div>`;
+            quizForm.innerHTML = questionHTML;
+            
+            // 添加选项选择事件
+            document.querySelectorAll('.option').forEach((option, index) => {
+                option.addEventListener('click', () => {
+                    userAnswers[currentQuestion] = index;
+                    displayQuestion();
+                });
+            });
+        }
+        
+        // 更新进度条
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        // 更新按钮状态
+        function updateButtons() {
+            prevBtn.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+            }
+        }
+        
+        // 下一题
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgressBar();
+                updateButtons();
+            }
+        });
+        
+        // 上一题
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgressBar();
+                updateButtons();
+            }
+        });
+        
+        // 提交测试
+        submitBtn.addEventListener('click', () => {
+            // 检查是否所有题目都已回答
+            const unanswered = userAnswers.some(answer => answer === undefined);
+            if (unanswered) {
+                alert('请完成所有题目后再提交！');
+                return;
+            }
+            
+            // 计算总分
+            let totalScore = 0;
+            userAnswers.forEach((answerIndex, questionIndex) => {
+                if (answerIndex !== undefined) {
+                    totalScore += questions[questionIndex].options[answerIndex].score;
+                }
+            });
+            
+            // 确定结果等级
+            let result;
+            for (const level of resultLevels) {
+                if (totalScore >= level.minScore && totalScore <= level.maxScore) {
+                    result = level;
+                    break;
+                }
+            }
+            
+            // 显示结果
+            resultLevel.textContent = result.level;
+            resultDesc.textContent = result.desc;
+            resultImage.textContent = result.emoji;
+            
+            // 隐藏测试界面，显示结果界面
+            quizForm.style.display = 'none';
+            document.querySelector('.buttons').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            document.querySelector('.question-counter').style.display = 'none';
+            resultContainer.style.display = 'block';
+        });
+        
+        // 重新测试
+        restartBtn.addEventListener('click', () => {
+            // 重置所有状态
+            currentQuestion = 0;
+            userAnswers.fill(undefined);
+            
+            // 显示测试界面，隐藏结果界面
+            quizForm.style.display = 'block';
+            document.querySelector('.buttons').style.display = 'flex';
+            document.querySelector('.progress-bar').style.display = 'block';
+            document.querySelector('.question-counter').style.display = 'block';
+            resultContainer.style.display = 'none';
+            
+            // 重新初始化测试
+            initQuiz();
+        });
+        
+        // 启动测试
+        initQuiz();
+    </script>
+</body>
+</html>
